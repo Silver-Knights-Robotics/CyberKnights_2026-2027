@@ -73,7 +73,7 @@ public class BasicOmniOpMode_Linear_CyberKnights extends LinearOpMode {
     private DcMotor backLeftDrive = null;
     private DcMotor frontRightDrive = null;
     private DcMotor backRightDrive = null;
-
+    private DcMotor launcher = null;
     @Override
     public void runOpMode() {
 
@@ -83,7 +83,7 @@ public class BasicOmniOpMode_Linear_CyberKnights extends LinearOpMode {
         backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
-
+        launcher = hardwareMap.get(DcMotor.class, "launcher");
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -98,7 +98,7 @@ public class BasicOmniOpMode_Linear_CyberKnights extends LinearOpMode {
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
         backRightDrive.setDirection(DcMotor.Direction.FORWARD);
-
+        launcher.setDirection(DcMotor.Direction.FORWARD);
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -115,6 +115,7 @@ public class BasicOmniOpMode_Linear_CyberKnights extends LinearOpMode {
             double lateral =  gamepad1.left_stick_x;
             double yaw     =  gamepad1.right_stick_x;
 
+            launcher = gamepad1.right_trigger_pressed;
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double frontLeftPower  = axial + lateral + yaw;
